@@ -21,28 +21,33 @@ const Button = ({ handleClick, text }) => {
 };
 
 const Statistics = (props) => {
-  return (
-    <React.Fragment>
-      <div>
-        {"good"} {props.good}
-      </div>
-      <div>
-        {"neutral"} {props.neutral}
-      </div>
-      <div>
-        {"bad"} {props.bad}
-      </div>
-      <div>all {props.good + props.bad + props.neutral}</div>
-      <div>
-        average{" "}
-        {(props.good - props.bad) / (props.good + props.bad + props.neutral)}
-      </div>
-      <div>
-        positive {(props.good / (props.good + props.bad + props.neutral)) * 100}
-        {"%"}
-      </div>
-    </React.Fragment>
-  );
+  if (props.good > 0 || props.bad > 0 || props.neutral > 0) {
+    return (
+      <React.Fragment>
+        <div>
+          {"good"} {props.good}
+        </div>
+        <div>
+          {"neutral"} {props.neutral}
+        </div>
+        <div>
+          {"bad"} {props.bad}
+        </div>
+        <div>all {props.good + props.bad + props.neutral}</div>
+        <div>
+          average{" "}
+          {(props.good - props.bad) / (props.good + props.bad + props.neutral)}
+        </div>
+        <div>
+          positive{" "}
+          {(props.good / (props.good + props.bad + props.neutral)) * 100}
+          {"%"}
+        </div>
+      </React.Fragment>
+    );
+  }
+
+  return <div>No feedback given</div>;
 };
 
 const App = () => {
