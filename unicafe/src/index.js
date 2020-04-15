@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
 const buttonStyle = {
-  borderRadius: '4px'
+  borderRadius: "4px",
 };
 
 const Title = (props) => {
@@ -28,6 +28,23 @@ const FeedbackResult = ({ text, result }) => {
   );
 };
 
+const All = (props) => {
+  return <div>all {props.good + props.bad + props.neutral}</div>;
+};
+
+const Average = (props) => {
+  return (
+    <div>
+      average{" "}
+      {(props.good - props.bad) / (props.good + props.bad + props.neutral)}
+    </div>
+  );
+};
+
+const PositivePercentage = (props) => {
+  return <div>positive {(props.good/(props.good + props.bad + props.neutral))*100}{"%"}</div>;
+};
+
 const App = () => {
   const giveFeedbackText = "give feedback";
   const statisticsText = "statistics";
@@ -35,6 +52,8 @@ const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
+  const [average, setAverage] = useState(0);
+  const [positive, setPositive] = useState(0);
 
   const handleGoodCLick = () => {
     setGood(good + 1);
@@ -58,6 +77,9 @@ const App = () => {
       <FeedbackResult text="good " result={good} />
       <FeedbackResult text="neutral " result={neutral} />
       <FeedbackResult text="bad " result={bad} />
+      <All bad={bad} neutral={neutral} good={good} />
+      <Average bad={bad} neutral={neutral} good={good} />
+      <PositivePercentage bad={bad} neutral={neutral} good={good} />
     </div>
   );
 };
