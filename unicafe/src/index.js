@@ -20,29 +20,29 @@ const Button = ({ handleClick, text }) => {
   );
 };
 
-const FeedbackResult = ({ text, result }) => {
+const Statistics = (props) => {
   return (
-    <div>
-      {text} {result}
-    </div>
+    <React.Fragment>
+      <div>
+        {"good"} {props.good}
+      </div>
+      <div>
+        {"neutral"} {props.neutral}
+      </div>
+      <div>
+        {"bad"} {props.bad}
+      </div>
+      <div>all {props.good + props.bad + props.neutral}</div>
+      <div>
+        average{" "}
+        {(props.good - props.bad) / (props.good + props.bad + props.neutral)}
+      </div>
+      <div>
+        positive {(props.good / (props.good + props.bad + props.neutral)) * 100}
+        {"%"}
+      </div>
+    </React.Fragment>
   );
-};
-
-const All = (props) => {
-  return <div>all {props.good + props.bad + props.neutral}</div>;
-};
-
-const Average = (props) => {
-  return (
-    <div>
-      average{" "}
-      {(props.good - props.bad) / (props.good + props.bad + props.neutral)}
-    </div>
-  );
-};
-
-const PositivePercentage = (props) => {
-  return <div>positive {(props.good/(props.good + props.bad + props.neutral))*100}{"%"}</div>;
 };
 
 const App = () => {
@@ -74,12 +74,7 @@ const App = () => {
       <Button handleClick={handleNeutralCLick} text="neutral" />
       <Button handleClick={handleBadCLick} text="bad" />
       <Title title={statisticsText} />
-      <FeedbackResult text="good " result={good} />
-      <FeedbackResult text="neutral " result={neutral} />
-      <FeedbackResult text="bad " result={bad} />
-      <All bad={bad} neutral={neutral} good={good} />
-      <Average bad={bad} neutral={neutral} good={good} />
-      <PositivePercentage bad={bad} neutral={neutral} good={good} />
+      <Statistics bad={bad} neutral={neutral} good={good} />
     </div>
   );
 };
