@@ -8,6 +8,10 @@ const buttonStyle = {
   borderRadius: "4px",
 };
 
+const tableRowStyle = {
+  width: "50px",
+};
+
 const Title = (props) => {
   return <h1> {props.title} </h1>;
 };
@@ -22,16 +26,25 @@ const Button = ({ handleClick, text }) => {
 
 const Statistic = ({ text, value, sign }) => {
   return (
-    <div>
-      {text} {value} {sign}
-    </div>
+    <table>
+      <tbody>
+        <tr>
+          <td  style = {tableRowStyle}>{text}</td>
+          <td  >
+            {value} {sign}
+          </td>
+        </tr>
+      </tbody>
+    </table>
   );
 };
 
 const Statistics = (props) => {
   const all = props.good + props.bad + props.neutral;
-  const average =((props.good - props.bad) / (props.good + props.bad + props.neutral));
-  const positive =((props.good / (props.good + props.bad + props.neutral)) * 100);
+  const average =
+    (props.good - props.bad) / (props.good + props.bad + props.neutral);
+  const positive =
+    (props.good / (props.good + props.bad + props.neutral)) * 100;
 
   if (props.good > 0 || props.bad > 0 || props.neutral > 0) {
     return (
