@@ -7,6 +7,7 @@ const App = (props) => {
     new Array(6 + 1).join("0").split("").map(parseFloat)
   );
   const [currentVote, setCurrentVote] = useState(0);
+  const [theMostVoted, setTheMostVoted] = useState(0);
 
   const randomAnecdotes = () => {
     const randomNum = Math.floor(Math.random() * anecdotes.length);
@@ -19,14 +20,28 @@ const App = (props) => {
     copy[selected] += 1;
     setPoints(copy);
     setCurrentVote(copy[selected]);
+    setTheMostVoted(
+      copy.indexOf(
+        Math.max.apply(
+          Math,
+          copy.map(function (o) {
+            return o;
+          })
+        )
+      )
+    );
   };
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <div>{props.anecdotes[selected]}</div>
       <div>has {currentVote} votes</div>
       <button onClick={updatePointsArray}>Vote</button>
       <button onClick={randomAnecdotes}>next anecdote</button>
+      <h1>Anecdote with most votes</h1>
+      <div>{props.anecdotes[theMostVoted]}</div>
+      <div>has {points[theMostVoted]} votes</div>
     </div>
   );
 };
